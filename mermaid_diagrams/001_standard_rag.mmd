@@ -1,0 +1,8 @@
+flowchart TD
+    A[Documents] --> B[Indexing]
+    B --> C[Indexed Knowledge Base]
+    D[User Query] --> E[Retriever]
+    E --> C
+    C --> F[Selected Documents]
+    F --> G[Generator]
+    G --> H[Generated Response]

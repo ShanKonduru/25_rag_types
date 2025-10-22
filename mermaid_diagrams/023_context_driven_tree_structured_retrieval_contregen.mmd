@@ -1,0 +1,13 @@
+flowchart TD
+    A[Input Query] --> B[Top-Down Planning & Retrieval Stage]
+    B --> C[Analyze Query and Generate Initial Sub-Queries]
+    C --> D[For each Sub-Query]
+    D --> E[Passage Retrieval]
+    E --> F[Verify]
+    F --> G[Build Tree]
+    
+    G --> H[Bottom-Up Synthesis & Generation Stage]
+    H --> I[Start from Leaf Nodes of Tree]
+    I --> J[Summarize Retrieved Content at Each Node]
+    J --> K[Integrate Summaries Upwards from Leaf to Root]
+    K --> L[Response]

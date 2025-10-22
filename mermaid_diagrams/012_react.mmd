@@ -1,0 +1,8 @@
+flowchart TD
+    A[Receive Observation] --> B[Update Context]
+    B --> C{Is Task Completed?}
+    C -->|Yes| D[Output]
+    C -->|No| E[Generate Thought]
+    E --> F[Generate Action]
+    F --> G[New Received Observation]
+    G --> B

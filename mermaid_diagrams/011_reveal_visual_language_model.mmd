@@ -1,0 +1,9 @@
+flowchart TD
+    A[Input Query] --> B[Query Encoding]
+    B --> C[Vision Transformer]
+    C --> D[Memory Encoding]
+    D --> E[Knowledge Base]
+    E --> F[Retriever]
+    F --> G[Knowledge Fusion]
+    G --> H[Generator]
+    H --> I[Output]

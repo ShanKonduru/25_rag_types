@@ -1,0 +1,7 @@
+flowchart TD
+    A[Input] --> B[Chunks]
+    B --> C[BERT Embeddings]
+    C --> D[K-NN Retrieval]
+    D --> E[Encoder]
+    E --> F[Chunked Cross-Attention]
+    F --> G[Output]

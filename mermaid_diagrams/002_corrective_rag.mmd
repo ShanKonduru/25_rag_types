@@ -1,0 +1,7 @@
+flowchart TD
+    A[User Query] --> B[Retriever]
+    B --> C{Is relevant to Doc?}
+    C -->|NO| D[Result]
+    C -->|YES| E[Re-write Query]
+    E --> F[Web Search]
+    F --> D

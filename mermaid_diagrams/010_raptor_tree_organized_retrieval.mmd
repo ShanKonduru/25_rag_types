@@ -1,0 +1,9 @@
+flowchart TD
+    A[Query] --> B[Encoder]
+    B --> C[Retrieved Context]
+    C --> D[Query]
+    D --> E[LLM]
+    E --> F[Answer]
+    
+    G[Tree Structure] --> H[Collapsed tree structure]
+    H --> C

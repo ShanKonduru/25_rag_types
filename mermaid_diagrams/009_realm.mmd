@@ -1,0 +1,11 @@
+flowchart TD
+    A[Unsupervised Pre-training] --> B[Pre-training Corpus]
+    B --> C[Neural Knowledge Retriever]
+    C --> D[Knowledge-Augmented Encoder]
+    D --> E[Answer]
+    
+    F[Supervised Fine-tuning] --> G[Input Query]
+    G --> H[Textual Knowledge Corpus]
+    H --> I[Neural Knowledge Retriever]
+    I --> J[Knowledge-Augmented Encoder]
+    J --> K[Answer]

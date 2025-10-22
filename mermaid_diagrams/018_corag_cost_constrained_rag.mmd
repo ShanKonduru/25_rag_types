@@ -1,0 +1,8 @@
+flowchart TD
+    A[Query] --> B[Query Embedding]
+    B --> C[Retrieve Potential Chunks]
+    C --> D[Configuration Agent]
+    D --> E[MCTS Policy]
+    E --> F[Optimal Chunk Combination]
+    F --> G[LLM Generation]
+    G --> H[Final Output]

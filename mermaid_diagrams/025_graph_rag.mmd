@@ -1,0 +1,18 @@
+flowchart TD
+    A[Documents] --> B[Compose Text Units]
+    B --> C[Embedded Chunks]
+    C --> D[Text Units]
+    
+    D --> E[Graph Extraction]
+    E --> F[Entity & Relation Extraction]
+    F --> G[Entity & Relation Summarization]
+    G --> H[Claim Extraction]
+    
+    H --> I[Graph Augmentation]
+    I --> J[Community Detection]
+    J --> K[Graph Embeddings]
+    K --> L[Community Summarization]
+    
+    L --> M[Network Visualization]
+    M --> N[Query Processing]
+    N --> O[Knowledge Graph Response]

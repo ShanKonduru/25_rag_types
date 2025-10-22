@@ -1,0 +1,8 @@
+flowchart TD
+    A[Input Query] --> B[Indexed Corpus]
+    B --> C[Encoder]
+    C --> D[Retriever]
+    D --> E[Language Model]
+    E --> F[Output]
+    
+    G[Joint Training Fine-tuning] --> D

@@ -1,0 +1,9 @@
+flowchart TD
+    A[User Query] --> B[Retriever]
+    B --> C{Is relevant to Enc?}
+    C -->|NO| D[Result]
+    C -->|YES| E[Results]
+    E --> F{Has sufficient evidence?}
+    F -->|NO| G[Re-write]
+    G --> B
+    F -->|YES| D

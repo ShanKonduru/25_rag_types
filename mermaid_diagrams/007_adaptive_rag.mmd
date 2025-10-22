@@ -1,0 +1,11 @@
+flowchart TD
+    A[Query] --> B[Retriever]
+    A --> C{Utility Index?}
+    C -->|YES| D[Grading]
+    C -->|NO| E[Web Search]
+    D --> F{Is Doc Relevant?}
+    F -->|YES| G[Generate Text]
+    F -->|NO| E
+    E --> H[Answer with Web Search]
+    G --> I[Answer]
+    H --> I

@@ -1,0 +1,9 @@
+flowchart TD
+    A[Input Prompt] --> B[Document Retrieval]
+    B --> C[Input Reformulation]
+    C --> D[Parallel LM Predictions]
+    D --> E[Ensemble Predictions]
+    E --> F[Final Output]
+    
+    G[Language Model - Supervised Retrieval] --> H[Training Loop]
+    H --> B

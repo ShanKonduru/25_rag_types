@@ -1,0 +1,8 @@
+flowchart TD
+    A[User Input Query] --> B[Query Expansion]
+    B --> C[Retriever]
+    C --> D[Passage Augmentation]
+    D --> E[Passage Reranking]
+    E --> F[Prompt Creation]
+    F --> G[Generator]
+    G --> H[Output]

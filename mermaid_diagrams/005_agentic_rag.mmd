@@ -1,0 +1,12 @@
+flowchart TD
+    A[User Query] --> B[Agent]
+    B --> C[Task Planner]
+    C --> D{Generation Task}
+    C --> E{Retrieval Task}
+    D --> F[Generator]
+    E --> G[Retriever]
+    G --> H[Knowledge Base]
+    H --> I[Context]
+    I --> F
+    F --> J[Generated Response]
+    J --> K[Final Output]
