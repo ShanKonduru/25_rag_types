@@ -353,12 +353,12 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[User Input Query] --> B[Memory Model (Light LLM)]
-    B --> C[Generates Clues]
-    C --> D[Clue-Based Retriever]
-    D --> E[Retrieves Context]
-    E --> F[Answer Generation (Heavy LLM)]
-    F --> G[Answer]
+    A["User Input Query"] --> B["Memory Model (Light LLM)"]
+    B --> C["Generates Clues"]
+    C --> D["Clue-Based Retriever"]
+    D --> E["Retrieves Context"]
+    E --> F["Answer Generation (Heavy LLM)"]
+    F --> G["Answer"]
 ```
 
 ---
