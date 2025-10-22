@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 The RAG Reality Check: Essential vs Academic</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #ffffff;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e8ecef;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f1f3f4;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .tldr {
+            background: #f8f9fa;
+            color: #495057;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #007bff;
+            font-size: 1.1em;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #dee2e6;
+        }
+
+        .section {
+            margin: 40px 0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .essential {
+            background: #e8f5e8;
+            color: #2c5530;
+            border: 1px solid #c3e6c3;
+            border-left: 4px solid #28a745;
+        }
+
+        .specialized {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+            border-left: 4px solid #ffc107;
+        }
+
+        .research {
+            background: #e2e3ff;
+            color: #383d41;
+            border: 1px solid #c7c8ff;
+            border-left: 4px solid #6f42c1;
+        }
+
+        .conclusion {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f1aeb5;
+            border-left: 4px solid #dc3545;
+        }
+
+        .section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section h3 {
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+
+        .rag-card {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .rag-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .rag-card h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .priority-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: auto;
+        }
+
+        .high-priority {
+            background: #28a745;
+            color: white;
+        }
+
+        .medium-priority {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .low-priority {
+            background: #6f42c1;
+            color: white;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .comparison-table th {
+            background: rgba(0, 0, 0, 0.03);
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .takeaway {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #17a2b8;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .takeaway h4 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .takeaway ul {
+            padding-left: 20px;
+        }
+
+        .takeaway li {
+            margin: 8px 0;
+        }
+
+        .interactive-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            border-color: #007bff;
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+
+        .flowchart {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .flow-step {
+            display: inline-block;
+            background: #ffffff;
+            color: #495057;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .flow-step:hover {
+            background: #f8f9fa;
+            border-color: #007bff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .arrow {
+            font-size: 1.5em;
+            margin: 0 10px;
+            color: #6c757d;
+        }
+
+        .toggle-details {
+            background: #007bff;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .toggle-details:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
+
+        .details {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 6px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            color: #495057;
+        }
+
+        .details.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            border-radius: 3px;
+            transition: width 2s ease;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #007bff;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .interactive-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎯 The RAG Reality Check</h1>
+            <p style="font-size: 1.2em; margin-top: 10px;">Separating Essential Foundations from Academic Explorations</p>
+        </header>
+
+        <div class="tldr">
+            <strong>📋 TL;DR:</strong> Out of 25 documented RAG variants, only ~11 solve 90% of real-world problems. Focus on mastering the essentials before exploring the exotic.
+        </div>
+
+        <section class="section">
+            <h2><i class="fas fa-chart-line"></i> Executive Summary</h2>
+            <p>The world of Retrieval-Augmented Generation (RAG) is exploding, and with it, a torrent of new terminology. Our analysis of 25 documented RAG variations reveals a critical truth: while innovation is rampant, <strong>the vast majority of successful, real-world enterprise needs—upwards of 90%—can be solved by mastering a small set of core, robust architectures</strong>. The rest are fascinating specialized, niche, or academic concepts.</p>
+            
+            <div class="interactive-stats">
+                <div class="stat-card" onclick="highlightEssential()">
+                    <span class="stat-number">3</span>
+                    <div>Essential Foundations</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
+                </div>
+                <div class="stat-card" onclick="highlightSpecialized()">
+                    <span class="stat-number">8</span>
+                    <div>High-Value Specializations</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 70%"></div></div>
+                </div>
+                <div class="stat-card" onclick="highlightResearch()">
+                    <span class="stat-number">14</span>
+                    <div>Research & Niche</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 30%"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section essential" id="essential">
+            <h2>🏛️ I. Essential Foundations: The Must-Haves (The Top 3)</h2>
+            <p><em>These are the non-negotiable building blocks. Your RAG strategy must start here. They solve the most common, foundational business problems.</em></p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>RAG Type</th>
+                        <th>Real-World Necessity</th>
+                        <th>Core Function</th>
+                        <th>Typical Use Cases</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="toggleDetails('standard-details')">
+                        <td><strong>1. Standard RAG</strong></td>
+                        <td><span class="priority-badge high-priority">🟢 Universal Foundation</span></td>
+                        <td>Simple, direct retrieval and answer generation</td>
+                        <td>Document Q&A, Basic Chatbots, Initial PoCs</td>
+                    </tr>
+                    <tr onclick="toggleDetails('conversational-details')">
+                        <td><strong>2. Conversational RAG (CORAL)</strong></td>
+                        <td><span class="priority-badge high-priority">🟢 Modern Necessity</span></td>
+                        <td>Maintains context and memory across multi-turn dialogues</td>
+                        <td>Virtual Assistants, Customer Service, Troubleshooters</td>
+                    </tr>
+                    <tr onclick="toggleDetails('graph-details')">
+                        <td><strong>3. Graph RAG</strong></td>
+                        <td><span class="priority-badge high-priority">🟢 Enterprise Critical</span></td>
+                        <td>Reasons over structured relationships and entities</td>
+                        <td>Knowledge Management, Compliance, Financial Modeling</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="takeaway">
+                <h4>💡 The Takeaway</h4>
+                <ul>
+                    <li><strong>No serious LLM application</strong> should be built without mastering the retrieval mechanisms in <strong>Standard RAG</strong></li>
+                    <li>Any system that engages users in a back-and-forth dialogue <strong>must implement Conversational RAG</strong></li>
+                    <li>For complex data where relationships matter more than words (like org charts or interconnected systems), <strong>Graph RAG is indispensable</strong></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section specialized" id="specialized">
+            <h2>🚀 II. High-Value Specializations: The Critical 8</h2>
+            <p><em>These are not required for every project, but they become critical when production constraints—like cost, performance, and complexity—are introduced.</em></p>
+
+            <h3>🛡️ For Robustness and Efficiency:</h3>
+            
+            <div class="rag-card" onclick="toggleDetails('fusion-details')">
+                <h4>4. Fusion RAG <span class="priority-badge medium-priority">Robustness</span></h4>
+                <p><strong>Why:</strong> Essential for robustness. Combines multiple retrieval methods (keyword + vector search) for higher recall and reliability</p>
+                <p><strong>When to use:</strong> When single-method retrieval is too brittle</p>
+                <button class="toggle-details">Show Details</button>
+                <div class="details" id="fusion-details">
+                    <p>Fusion RAG addresses the limitation of relying on a single retrieval method. By combining semantic vector search with traditional keyword-based search, it ensures comprehensive coverage and reduces the risk of missing relevant information.</p>
+                </div>
+            </div>
+
+            <div class="rag-card" onclick="toggleDetails('auto-details')">
+                <h4>5. AUTO RAG <span class="priority-badge medium-priority">Efficiency</span></h4>
+                <p><strong>Why:</strong> Critical for production efficiency. Automates pipeline optimization (chunking, embedding model selection)</p>
+                <p><strong>When to use:</strong> When you need to scale and maintain peak performance</p>
+                <button class="toggle-details">Show Details</button>
+                <div class="details" id="auto-details">
+                    <p>AUTO RAG removes the manual overhead of tuning RAG systems. It automatically optimizes parameters like chunk size, overlap, embedding models, and retrieval strategies based on your specific data and use case.</p>
+                </div>
+            </div>
+
+            <h3>💰 For Cost and Quality Control:</h3>
+            
+            <div class="rag-card" onclick="toggleDetails('adaptive-details')">
+                <h4>6. Adaptive RAG & 7. CORAG <span class="priority-badge medium-priority">Cost Control</span></h4>
+                <p><strong>Why:</strong> Dynamically decide when to retrieve, what to retrieve, or skip LLM calls entirely for cost/latency optimization</p>
+                <p><strong>When to use:</strong> When cost or latency is a primary operational metric</p>
+                <button class="toggle-details">Show Details</button>
+                <div class="details" id="adaptive-details">
+                    <p>These approaches use confidence scoring and Monte Carlo Tree Search to make intelligent decisions about retrieval necessity, significantly reducing operational costs while maintaining quality.</p>
+                </div>
+            </div>
+
+            <div class="rag-card" onclick="toggleDetails('corrective-details')">
+                <h4>8. Corrective RAG <span class="priority-badge high-priority">Quality</span></h4>
+                <p><strong>Why:</strong> Adds validation loop to check answers against retrieved context for hallucinations</p>
+                <p><strong>When to use:</strong> High-stakes, accuracy-critical domains (legal, medical)</p>
+                <button class="toggle-details">Show Details</button>
+                <div class="details" id="corrective-details">
+                    <p>Corrective RAG implements a feedback mechanism that validates generated responses against source material, identifying potential hallucinations and triggering re-retrieval when necessary.</p>
+                </div>
+            </div>
+
+            <h3>🤖 For Advanced Tool Use and Reasoning:</h3>
+            
+            <div class="rag-card" onclick="toggleDetails('agentic-details')">
+                <h4>9. Agentic RAG & 10. REACT <span class="priority-badge high-priority">Future</span></h4>
+                <p><strong>Why:</strong> Empowers LLM to reason, plan, and use external tools (databases, APIs, code interpreters)</p>
+                <p><strong>When to use:</strong> Multi-step tasks requiring planning and action</p>
+                <button class="toggle-details">Show Details</button>
+                <div class="details" id="agentic-details">
+                    <p>These represent the evolution of RAG into autonomous agents capable of breaking down complex queries, planning execution steps, and utilizing various tools to complete tasks.</p>
+                </div>
+            </div>
+
+            <div class="rag-card" onclick="toggleDetails('self-details')">
+                <h4>11. Self RAG <span class="priority-badge medium-priority">Validation</span></h4>
+                <p><strong>Why:</strong> LLM self-critiques generated answers and retrieves new information if needed</p>
+                <p><strong>When to use:</strong> When internal validation is necessary</p>
+                <button class="toggle-details">Show Details</button>
+                <div class="details" id="self-details">
+                    <p>Self RAG implements introspective capabilities, allowing the model to evaluate its own responses and iteratively improve them through additional retrieval and reasoning cycles.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section research" id="research">
+            <h2>🔬 III. Research & Niche Explorations: The "Nice-to-Know" (The Other 14)</h2>
+            <p><em>The remaining RAG variants, while academically fascinating, address highly specific problems or represent foundational research ideas that have been largely absorbed into the 'Advanced RAG' umbrella.</em></p>
+
+            <h3>📚 Academic Foundations (REALM, RETRO)</h3>
+            <p>These were key research breakthroughs that paved the way for modern RAG:</p>
+            <ul style="margin: 15px 0; padding-left: 25px;">
+                <li><strong>REALM</strong> (Retrieval-Augmented Language Model) was the original concept</li>
+                <li><strong>RETRO</strong> (Retrieval-Enhanced Transformer) explored memory-efficient scaling</li>
+            </ul>
+            <p><strong>Reality:</strong> They are rarely implemented as-is commercially today; their core ideas are integrated into modern techniques.</p>
+
+            <h3>🎯 Hyper-Specialized Applications</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>RAG Type</th>
+                        <th>Specific Use Case</th>
+                        <th>Why It's Niche</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>RAPTOR</strong></td>
+                        <td>Multi-level, hierarchical document summarization</td>
+                        <td>Limited to large legal codes, academic papers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CRAT</strong></td>
+                        <td>Translation enhancement</td>
+                        <td>Purely translation-specific</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EACO-RAG</strong></td>
+                        <td>Edge computing optimization</td>
+                        <td>Limited to mobile, IoT deployments</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="takeaway">
+                <h4>⚠️ The Risk of Over-Engineering</h4>
+                <p>The primary danger with these niche variants is attempting to retrofit them onto a generic problem. <strong>The performance gain rarely justifies the complexity, maintenance overhead, and steep learning curve for development teams.</strong></p>
+            </div>
+        </section>
+
+        <section class="section conclusion">
+            <h2>💡 IV. Conclusion: Focus Your Efforts</h2>
+            
+            <div class="takeaway">
+                <h4>🎯 The "RAG Reality Check" is simple:</h4>
+                <p><strong>The solution to better performance is not always a new, complicated RAG type. It's often better implementation of the basics.</strong></p>
+            </div>
+
+            <h3>🛠️ To build an impactful, scalable RAG system:</h3>
+            
+            <div class="flowchart">
+                <div class="flow-step" onclick="highlightEssential()">Master the Foundational 3</div>
+                <span class="arrow">→</span>
+                <div class="flow-step" onclick="highlightSpecialized()">Strategically Apply the Specialized 8</div>
+                <span class="arrow">→</span>
+                <div class="flow-step">Production Success</div>
+            </div>
+
+            <h3>📋 Action Plan:</h3>
+            <div class="rag-card">
+                <h4>1. 🎯 Master the Foundational 3</h4>
+                <p>Standard, Conversational, and Graph RAG</p>
+            </div>
+            <div class="rag-card">
+                <h4>2. 🚀 Strategically Apply the Specialized 8</h4>
+                <p>Introduce techniques like Fusion RAG (for recall), Adaptive/CORAG (for cost), and Agentic RAG (for complexity) only when a specific, verifiable production constraint demands it</p>
+            </div>
+
+            <div class="takeaway">
+                <h4>🏆 The Bottom Line</h4>
+                <p>By prioritizing this pragmatic approach, practitioners can achieve <strong>high-quality, production-ready AI applications</strong> without being overwhelmed by the academic noise.</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; font-style: italic; font-size: 1.2em;">
+                "Perfect is the enemy of good. Master the fundamentals, then specialize strategically."
+            </div>
+        </section>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Toggle details functionality
+        function toggleDetails(detailsId) {
+            const details = document.getElementById(detailsId);
+            if (details) {
+                details.classList.toggle('show');
+            }
+        }
+
+        // Highlight sections
+        function highlightEssential() {
+            document.getElementById('essential').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('essential').style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                document.getElementById('essential').style.transform = 'scale(1)';
+            }, 500);
+        }
+
+        function highlightSpecialized() {
+            document.getElementById('specialized').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('specialized').style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                document.getElementById('specialized').style.transform = 'scale(1)';
+            }, 500);
+        }
+
+        function highlightResearch() {
+            document.getElementById('research').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('research').style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                document.getElementById('research').style.transform = 'scale(1)';
+            }, 500);
+        }
+
+        // Back to top functionality
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show/hide back to top button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Animate progress bars on page load
+        window.addEventListener('load', function() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+
+        // Add hover effects to RAG cards
+        document.querySelectorAll('.rag-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
