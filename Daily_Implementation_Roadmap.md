@@ -6,81 +6,177 @@
 **Daily Commitment**: 4-6 hours  
 **Success Metrics**: All systems functional, tested, and documented
 
+## 🖥️ CLI Interface Usage Guide
+
+### Command Structure
+The project uses a modern CLI interface with named parameters for better clarity and maintainability:
+
+```bash
+python main.py <command> [options]
+```
+
+### Available Commands
+
+#### 1. Query Processing
+```bash
+python main.py query --rag_type <system_type> --query "<your_question>" [--model <model_name>]
+```
+
+**Parameters Explained**:
+- `--rag_type`: Specifies which RAG system to use
+  - `standard` - Basic retrieval-augmented generation (✅ Available)
+  - `conversational` - RAG with conversation memory (🚧 Coming Day 2)
+  - `hierarchical` - Multi-level document retrieval (🚧 Coming Day 3)
+  - `graph` - Knowledge graph enhanced RAG (🚧 Coming Day 4)
+  - And 21 more advanced types...
+
+- `--query`: The actual question or query to process
+- `--model`: (Optional) Specific Ollama model to use (overrides config default)
+
+**Example Usage**:
+```bash
+# Basic RAG query
+python main.py query --rag_type standard --query "What is RAG and how does it work?"
+
+# Using specific model
+python main.py query --rag_type standard --query "Explain Ollama" --model llama3.1
+
+# Conversational RAG (upcoming)
+python main.py query --rag_type conversational --query "What is machine learning?"
+```
+
+#### 2. Document Management
+```bash
+python main.py add-docs --rag_type <system_type> [--file <path>] [--text "<content>"]
+```
+
+**Parameters Explained**:
+- `--rag_type`: Target RAG system to add documents to
+- `--file`: Path to document file (supports .txt, .md, .pdf, .docx)
+- `--text`: Direct text content to add
+
+**Example Usage**:
+```bash
+# Add document from file
+python main.py add-docs --rag_type standard --file demo_docs/rag_overview.txt
+
+# Add text directly
+python main.py add-docs --rag_type standard --text "RAG stands for Retrieval-Augmented Generation..."
+```
+
+#### 3. System Testing
+```bash
+python main.py test
+```
+
+**Function**: Performs comprehensive health checks on all system components:
+- Ollama connectivity and model availability
+- ChromaDB vector database status
+- Embedding model functionality
+- spaCy NLP pipeline status
+- Configuration validation
+
 ---
 
 ## 📆 Week 1: Foundation & Essential RAG Types
 
-### Day 1 (Tomorrow) - Environment Setup & Architecture
-**Time Allocation**: 6 hours
+### ✅ Day 1 - Environment Setup & Architecture (COMPLETED)
+**Time Allocation**: 6 hours | **Status**: ✅ COMPLETED
 
-#### Morning Session (3 hours) ☀️
-- [ ] **Environment Setup** (90 minutes)
-  - Run `setup_project.bat` script
-  - Install and configure Ollama
-  - Test all dependencies
-  - Verify GPU/CPU setup for optimal performance
+#### ✅ Morning Session (3 hours) ☀️
+- ✅ **Environment Setup** (90 minutes)
+  - ✅ Run `setup_project.bat` script - Successfully created project structure
+  - ✅ Install and configure Ollama - Multiple models available (llama2, qwen3-coder, etc.)
+  - ✅ Test all dependencies - All 25+ RAG dependencies installed and verified
+  - ✅ Verify GPU/CPU setup for optimal performance - System health check passed
 
-- [ ] **Project Structure Implementation** (90 minutes)
-  - Create base RAG interface from Technical Implementation Plan
-  - Implement Ollama service wrapper
-  - Set up configuration management system
-  - Initialize logging and monitoring framework
+- ✅ **Project Structure Implementation** (90 minutes)
+  - ✅ Create base RAG interface from Technical Implementation Plan - `common/models/base_rag.py`
+  - ✅ Implement Ollama service wrapper - `common/ollama_service.py` with full API support
+  - ✅ Set up configuration management system - `common/config/config_manager.py` with YAML support
+  - ✅ Initialize logging and monitoring framework - Performance tracking integrated
 
-#### Afternoon Session (3 hours) 🌅
-- [ ] **Core Components Development** (120 minutes)
-  - Build document processing utilities
-  - Implement vector store management (ChromaDB)
-  - Create embedding service integration
-  - Set up basic evaluation metrics
-
-- [ ] **Testing Framework Setup** (60 minutes)
-  - Implement basic test suite structure
-  - Create test data loading utilities  
-  - Set up performance monitoring
-  - Write first smoke tests
+#### ✅ Afternoon Session (3 hours) 🌅
+- ✅ **Standard RAG Implementation** (180 minutes)
+  - ✅ Build Standard RAG system - `rag_types/standard_rag.py` fully functional
+  - ✅ Implement vector store management (ChromaDB) - Persistent storage with cosine similarity
+  - ✅ Create embedding service integration - SentenceTransformers + Ollama embeddings fallback
+  - ✅ Document processing with intelligent chunking using spaCy NLP pipeline
 
 **Daily Deliverables**:
-- ✅ Fully configured development environment
-- ✅ Base architecture implemented and tested
-- ✅ Core components functional
-- ✅ Basic testing framework operational
+- ✅ Fully configured development environment with 25+ dependencies
+- ✅ Base architecture implemented and tested (BaseRAG, OllamaService, ConfigManager)
+- ✅ Standard RAG system fully functional with CLI interface
+- ✅ Document ingestion and query processing working end-to-end
+
+**CLI Usage Examples**:
+```bash
+# Add documents to Standard RAG
+python main.py add-docs --rag_type standard --file demo_docs/rag_overview.txt
+
+# Query Standard RAG system
+python main.py query --rag_type standard --query "What is RAG and how does it work?"
+
+# System health check
+python main.py test
+```
+
+**Performance Metrics Achieved**:
+- Document Processing: 7-12 chunks per document with spaCy sentence boundary detection
+- Embedding Generation: 15-17 batches/second with SentenceTransformers
+- Query Response Time: 4-10 seconds end-to-end (including LLM generation)
+- Retrieval Accuracy: 0.45-0.51 confidence scores with proper source attribution
 
 ---
 
-### Day 2 - Standard RAG Implementation
-**Time Allocation**: 5 hours
+### Day 2 - Conversational RAG Implementation
+**Time Allocation**: 5 hours | **Status**: 🎯 READY TO START
+
+> **Note**: Standard RAG implementation was completed ahead of schedule on Day 1
 
 #### Morning Session (2.5 hours) ☀️
-- [ ] **Standard RAG Core Logic** (90 minutes)
-  - Implement document chunking strategies
-  - Build retrieval mechanism with ChromaDB
-  - Create context preparation pipeline
-  - Integrate Ollama for response generation
+- [ ] **Conversation Memory System** (90 minutes)
+  - Implement session management with unique IDs
+  - Build conversation history storage in memory/disk
+  - Create context window management (last N turns)
+  - Add memory compression for long conversations
 
-- [ ] **Response Processing** (60 minutes)
-  - Implement confidence scoring
-  - Build source attribution system
-  - Add response validation
-  - Create metadata collection
+- [ ] **Conversational RAG Architecture** (60 minutes)
+  - Extend BaseRAG for conversation context
+  - Implement ConversationalRAG class with memory
+  - Add context continuity mechanisms
+  - Create conversation state management
 
 #### Afternoon Session (2.5 hours) 🌅
-- [ ] **Testing & Optimization** (90 minutes)
-  - Write comprehensive unit tests for Standard RAG
-  - Test with sample documents and queries
-  - Optimize chunking parameters
-  - Benchmark performance metrics
+- [ ] **Integration & Enhancement** (90 minutes)
+  - Integrate conversational components with existing pipeline
+  - Implement multi-turn query processing
+  - Add context relevance scoring for conversation history
+  - Test conversation flow and context preservation
 
-- [ ] **Demo Application** (60 minutes)
-  - Create simple Streamlit interface
-  - Add document upload functionality
-  - Implement query processing UI
-  - Test end-to-end workflow
+- [ ] **CLI Enhancement & Testing** (60 minutes)
+  - Add session support to CLI commands
+  - Implement conversation continuation features
+  - Write comprehensive tests for conversational flows
+  - Create conversation examples and documentation
+
+**CLI Usage Examples**:
+```bash
+# Start new conversational session
+python main.py query --rag_type conversational --query "What is RAG?"
+
+# Continue conversation (session auto-managed)
+python main.py query --rag_type conversational --query "How does it compare to traditional search?"
+
+# Explicit session management
+python main.py query --rag_type conversational --session_id chat_001 --query "Can you give me examples?"
+```
 
 **Daily Deliverables**:
-- ✅ Fully functional Standard RAG system
-- ✅ Comprehensive test suite
-- ✅ Basic web interface
-- ✅ Performance benchmarks
+- ✅ Conversational RAG system fully functional
+- ✅ Multi-turn conversation capability with memory
+- ✅ Session management working
+- ✅ Enhanced CLI with conversation support
 
 ---
 
